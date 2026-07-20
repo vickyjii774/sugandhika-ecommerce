@@ -12,21 +12,31 @@ export function CartProvider({ children }) {
     localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  const addToCart = (product) => {
-    setCartItems((prev) => {
-      const existing = prev.find((item) => item.id === product.id);
+const addToCart = (product) => {
+  console.log("ADD TO CART CALLED");
+  console.log("Product:", product);
 
-      if (existing) {
-        return prev.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
-      }
+  setCartItems((prev) => {
+    console.log("Previous cart:", prev);
 
-      return [...prev, { ...product, quantity: 1 }];
-    });
-  };
+    const existing = prev.find((item) => item.id === product.id);
+
+    if (existing) {
+      const updated = prev.map((item) =>
+        item.id === product.id
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      );
+
+      console.log("Updated cart:", updated);
+      return updated;
+    }
+
+    const updated = [...prev, { ...product, quantity: 1 }];
+    console.log("Updated cart:", updated);
+    return updated;
+  });
+};
 
   const removeFromCart = (id) => {
     setCartItems((prev) => prev.filter((item) => item.id !== id));

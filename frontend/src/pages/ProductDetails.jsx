@@ -36,7 +36,7 @@ export default function ProductDetails() {
           <img
             src={product.image}
             alt={product.name}
-            className="mx-auto max-h-[500px] object-contain"
+            className="mx-auto max-h-96 object-contain"
           />
         </div>
 
