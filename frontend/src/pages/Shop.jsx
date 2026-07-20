@@ -1,105 +1,102 @@
 import { useMemo, useState } from "react";
+import products from "../data/products";
 
-import { useProducts } from "../hooks/useProducts";
-
-import ProductGrid from "../components/product/ProductGrid";
-import ProductFilters from "../components/product/ProductFilters";
-import SearchBar from "../components/product/SearchBar";
-import SortDropdown from "../components/product/SortDropdown";
-import Pagination from "../components/product/Pagination";
-
-import Loader from "../components/ui/Loader";
 import Container from "../components/ui/Container";
-import SectionTitle from "../components/ui/SectionTitle";
+import SearchBar from "../components/shop/SearchBar";
+import SortDropdown from "../components/shop/SortDropdown";
+import FilterSidebar from "../components/shop/FilterSidebar";
+import ProductGrid from "../components/shop/ProductGrid";
+import { FiSearch } from "react-icons/fi";
+
+
 
 export default function Shop() {
-  const { products, loading } = useProducts();
-
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("default");
 
   const filteredProducts = useMemo(() => {
-    let result = [...products];
+    let data = products.filter((product) =>
+      product.name.toLowerCase().includes(search.toLowerCase())
+    );
 
-    // Search
-    if (search.trim()) {
-      result = result.filter((product) =>
-        product.name.toLowerCase().includes(search.toLowerCase())
-      );
+    if (sort === "low") {
+      data.sort((a, b) => a.price - b.price);
+    } else if (sort === "high") {
+      data.sort((a, b) => b.price - a.price);
+    } else if (sort === "rating") {
+      data.sort((a, b) => b.rating - a.rating);
     }
 
-    // Sort
-    switch (sort) {
-      case "priceLow":
-        result.sort((a, b) => a.price - b.price);
-        break;
-
-      case "priceHigh":
-        result.sort((a, b) => b.price - a.price);
-        break;
-
-      case "rating":
-        result.sort((a, b) => b.rating - a.rating);
-        break;
-
-      default:
-        break;
-    }
-
-    return result;
-  }, [products, search, sort]);
-
-  if (loading) return <Loader />;
+    return data;
+  }, [search, sort]);
 
   return (
-    <section className="bg-[#FFF8E7] py-16">
-      <Container>
-        <SectionTitle
-          title="Shop"
-          subtitle="Explore our natural mosquito protection products."
-        />
+    <Container>
+      <div className="py-10">
+        <h1 className="mb-8 text-4xl font-bold text-green-800">
+          Shop Sugandhika
+        </h1>
 
-        <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div className="w-full md:max-w-md">
-            <SearchBar
-              value={search}
-              onChange={setSearch}
-            />
+        <div className="mb-8 flex flex-col gap-4 md:flex-row">
+          <div className="flex-1">
+            <SearchBar value={search} onChange={setSearch} />
           </div>
 
-          <SortDropdown
-            value={sort}
-            onChange={setSort}
-          />
+          <SortDropdown value={sort} onChange={setSort} />
         </div>
 
         <div className="grid gap-8 lg:grid-cols-4">
-          {/* Sidebar */}
           <div>
-            <ProductFilters />
+            <FilterSidebar />
           </div>
 
-          {/* Products */}
-          <div className="lg:col-span-3">
-            {filteredProducts.length > 0 ? (
-              <>
-                <ProductGrid products={filteredProducts} />
-                <Pagination />
-              </>
-            ) : (
-              <div className="rounded-xl bg-white p-10 text-center shadow">
-                <h2 className="text-2xl font-bold">
-                  No products found
-                </h2>
+<div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">  <div className="relative flex-1">
+    <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
 
-                <p className="mt-2 text-gray-500">
-                  Try another search.
-                </p>
-              </div>
-            )}
+    <input
+      type="text"
+      placeholder="Search products..."
+      className="w-full rounded-xl border border-gray-300 py-3 pl-12 pr-4 focus:border-forest-500 focus:outline-none"
+    />
+  </div>
+
+  <select className="rounded-xl border border-gray-300 px-5 py-3">
+    <option>All Categories</option>
+    <option>Spray</option>
+    <option>Coil</option>
+    <option>Cream</option>
+  </select>
+
+  <select className="rounded-xl border border-gray-300 px-5 py-3">
+    <option>Newest</option>
+    <option>Price Low → High</option>
+    <option>Price High → Low</option>
+  </select>
+</div>
+
+
+          <div className="lg:col-span-3">
+            <ProductGrid products={filteredProducts} />
           </div>
         </div>
-      </Container>
-    </section>
+      </div>
+      <div className="mt-16 flex justify-center gap-3">
+  <button className="rounded-lg border px-4 py-2">
+    Previous
+  </button>
+
+  <button className="rounded-lg bg-forest-600 px-4 py-2 text-white">
+    1
+  </button>
+
+  <button className="rounded-lg border px-4 py-2">
+    2
+  </button>
+
+  <button className="rounded-lg border px-4 py-2">
+    Next
+  </button>
+</div>
+    </Container>
   );
 }

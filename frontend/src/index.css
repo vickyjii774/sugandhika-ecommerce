@@ -115,3 +115,56 @@ body {
 .nav-link.active::after {
   width: 100%;
 }
+
+/* Selection */
+::selection {
+  background: var(--color-forest-500);
+  color: white;
+}
+
+/* Smooth transitions */
+* {
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+/* Links */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Images */
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* Buttons */
+button {
+  cursor: pointer;
+}
+
+/* Inputs */
+input,
+textarea,
+select {
+  outline: none;
+}
+
+/* Card */
+.card {
+  @apply rounded-2xl bg-white shadow-md border border-gray-100;
+}
+
+/* Section */
+.section {
+  @apply py-20;
+}
+
+/* Container spacing */
+.page {
+  @apply py-12;
+}

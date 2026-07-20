@@ -59,17 +59,7 @@ export default function Navbar() {
         {/* Icons / Actions */}
         <div className="flex items-center gap-5 text-xl">
           
-          {/* Search bar inside header (Desktop) */}
-          <form onSubmit={handleSearchSubmit} className="relative hidden max-w-xs md:block">
-            <input
-              type="text"
-              placeholder="Search products..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="rounded-full bg-beige-100 px-4 py-1.5 pl-10 text-sm focus:outline-none focus:ring-1 focus:ring-forest-500 dark:bg-forest-900 dark:text-sage-100"
-            />
-            <FiSearch className="absolute top-2.5 left-3.5 text-sm text-gray-400" />
-          </form>
+          
 
           {/* Theme toggle */}
           <button onClick={toggleTheme} className="text-gray-600 transition duration-300 hover:text-forest-600 dark:text-sage-200" aria-label="Toggle theme">
@@ -151,16 +141,7 @@ export default function Navbar() {
       {/* Mobile Drawer Menu */}
       {isOpen && (
         <div className="glass border-t border-gray-100 p-6 md:hidden dark:glass-dark dark:border-forest-900">
-          <form onSubmit={handleSearchSubmit} className="relative mb-6">
-            <input
-              type="text"
-              placeholder="Search products..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full rounded-full bg-beige-100 px-4 py-2 pl-10 text-sm focus:outline-none dark:bg-forest-900 dark:text-sage-100"
-            />
-            <FiSearch className="absolute top-3 left-3 text-gray-400" />
-          </form>
+          
 
           <div className="flex flex-col gap-4">
             <Link to="/" onClick={() => setIsOpen(false)} className="font-semibold text-gray-800 dark:text-sage-100">Home</Link>

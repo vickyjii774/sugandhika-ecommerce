@@ -6,6 +6,13 @@ import api from "../services/api";
 import ProductCard from "../components/product/ProductCard";
 import SEO from "../components/common/SEO";
 import productsMock from "../data/products";
+import Categories from "../components/home/Categories";
+import Testimonials from "../components/home/Testimonials";
+import Newsletter from "../components/home/Newsletter";
+import FAQ from "../components/home/FAQ";
+import FeaturedProducts from "../components/home/FeaturedProducts";
+
+
 
 export default function Home() {
   const [featuredProducts, setFeaturedProducts] = useState([]);
@@ -207,6 +214,7 @@ export default function Home() {
         </div>
       </section>
 
+     
       {/* 5. Testimonial Section */}
       <section className="py-24 px-6 bg-beige-50 dark:bg-forest-900">
         <div className="mx-auto max-w-4xl text-center">
