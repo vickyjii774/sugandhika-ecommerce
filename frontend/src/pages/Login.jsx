@@ -1,7 +1,7 @@
-export default function Shop() {
+export default function Login() {
   return (
     <div className="min-h-screen flex items-center justify-center text-5xl font-bold">
-      Shop Page
+      Login Page
     </div>
   );
 }

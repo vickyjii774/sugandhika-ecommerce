@@ -2,31 +2,38 @@ import { FiHeart, FiShoppingCart, FiStar } from "react-icons/fi";
 import Card from "../ui/Card";
 import Badge from "../ui/Badge";
 import Button from "../ui/Button";
+import { Link } from "react-router-dom";
 
 export default function ProductCard({ product }) {
   return (
     <Card className="group overflow-hidden p-0">
       {/* Product Image */}
-      <div className="relative h-64 overflow-hidden bg-green-50">
-        <img
-          src={product.image}
-          alt={product.name}
-          className="h-full w-full object-contain p-6 transition duration-500 group-hover:scale-110"
-        />
 
-        <div className="absolute left-4 top-4">
-          <Badge color="green">{product.badge}</Badge>
-        </div>
+<div className="relative h-64 overflow-hidden bg-green-50">
+  <Link to={`/product/${product.slug}`}>
+    <img
+      src={product.image}
+      alt={product.name}
+      className="h-full w-full object-contain p-6 transition duration-500 group-hover:scale-110"
+    />
+  </Link>
 
-        <button className="absolute right-4 top-4 rounded-full bg-white p-2 shadow hover:bg-green-50">
-          <FiHeart size={20} />
-        </button>
-      </div>
+  <div className="absolute left-4 top-4">
+    <Badge color="green">{product.badge}</Badge>
+  </div>
+
+  <button className="absolute right-4 top-4 rounded-full bg-white p-2 shadow hover:bg-green-50">
+    <FiHeart size={20} />
+  </button>
+</div>
 
       {/* Product Info */}
       <div className="p-6">
-        <h3 className="text-lg font-bold">{product.name}</h3>
-
+<Link to={`/product/${product.slug}`}>
+  <h3 className="text-lg font-bold hover:text-green-700 transition-colors">
+    {product.name}
+  </h3>
+</Link>
         <p className="mt-2 line-clamp-2 text-sm text-gray-600">
           {product.description}
         </p>

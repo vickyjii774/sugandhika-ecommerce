@@ -7,17 +7,7 @@ export const productsService = {
 
   getBySlug(slug) {
     return Promise.resolve(
-      products.find((product) => product.slug === slug)
-    );
-  },
-
-  search(query) {
-    const q = query.toLowerCase();
-
-    return Promise.resolve(
-      products.filter((product) =>
-        product.name.toLowerCase().includes(q)
-      )
+      products.find((p) => p.slug === slug)
     );
   },
 };

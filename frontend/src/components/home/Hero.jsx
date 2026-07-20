@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { FiArrowRight } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 export default function Hero() {
   return (
@@ -27,9 +28,11 @@ export default function Hero() {
           </p>
 
           <div className="mt-10 flex gap-4">
-            <button className="rounded-xl bg-green-700 px-7 py-4 font-semibold text-white transition hover:bg-green-800">
-              Shop Now
-            </button>
+            <Link to="/shop">
+  <button className="rounded-xl bg-green-700 px-6 py-3 text-white">
+    Shop Now
+  </button>
+</Link>
 
             <button className="flex items-center gap-2 rounded-xl border border-green-700 px-7 py-4 font-semibold text-green-700 transition hover:bg-green-50">
               Learn More

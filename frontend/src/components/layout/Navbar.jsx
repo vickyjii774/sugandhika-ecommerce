@@ -22,7 +22,9 @@ export default function Navbar() {
         <div className="flex items-center gap-4 text-xl">
           <button><FiSearch /></button>
           <button><FiHeart /></button>
-          <button><FiShoppingCart /></button>
+        <Link to="/cart">
+        <FiShoppingCart />
+        </Link>
           <button><FiUser /></button>
 
           <button className="md:hidden">
